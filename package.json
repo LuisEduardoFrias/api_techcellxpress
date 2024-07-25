@@ -5,7 +5,8 @@
   "description": "Api of techcellxpress",
   "main": "index.js",
   "scripts": {
-    "start": "node --watch src/index.js"
+    "dev": "node --watch src/index.js",
+    "start": "node src/index.js"
   },
   "keywords": [
     "express",
