@@ -6,30 +6,30 @@ import cookieParser from "cookie-parser";
 import swaggerUi from 'swagger-ui-express';
 import { createServer } from "http";
 
-import { PORT, PROTOCOL, DOMAIN, SWAGGER } from './config.js';
+import { PORT, PROTOCOL, DOMAIN, SWAGGER } from '../src/config.js';
 import sequelize from '../src/libs/db.js';
-import swaggerDoc from './config_swagger.js';
-import configCors from './config_cors.js';
+import swaggerDoc from '../src/config_swagger.js';
+import configCors from '../src/config_cors.js';
 //
 
 //sync tables dabe
 //import '../src/models/models_db.js';
 //
 
-import session from './routes/session.js';
-import phoneProduct from './routes/phone_product.js';
-import admin from './routes/admin.js';
-import Socket from './helpers/socket.js';
-import Admin from './controllers/admin_controller.js';
+import session from '../src/routes/session.js';
+import phoneProduct from '../src/routes/phone_product.js';
+import admin from '../src/routes/admin.js';
+import Socket from '../src/helpers/socket.js';
+import Admin from '../src/controllers/admin_controller.js';
 //----------------------------
 
 const app = express();
 const httpServer = createServer(app);
 
 //settings
-app.set('protocol', PROTOCOL);
-app.set('domain', DOMAIN);
-app.set('port', PORT);
+//app.set('protocol', PROTOCOL);
+//app.set('domain', DOMAIN);
+//app.set('port', PORT);
 app.disabled("x-powered-by");
 
 
