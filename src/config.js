@@ -5,6 +5,7 @@ dotenv.config();
 
 export const {
   PROTOCOL = process.env.PROTOCOL || 'http://',
+  SWAGGER = process.env.SWAGGER || '/api-docs',
   DOMAIN = process.env.DOMAIN || 'localhost:',
   SECRET_ENCRYOT_KEY = process.env.SALT || 'tcx-crypto',
   PORT = process.env.PORT || 3010,
