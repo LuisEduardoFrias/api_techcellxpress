@@ -57,14 +57,9 @@ router.get('/', async (req, res) => {
 router.get('/search/:search', async (req, res) => {
   try {
     const { search } = req.params;
-    const { error, data } = await PhoneProduct.read();
+    const { error, data } = await PhoneProduct.search(search);
 
-    let filterData = [];
-    if (data) {
-      filterData = data.filter(e => e.brand === search);
-    }
-
-    res.status(error ? 404 : 200).json({ error, filterData });
+    res.status(error ? 404 : 200).json({ error, data });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Server error.", data: null });

@@ -1,5 +1,5 @@
 //
-import { Phone } from '../models/models_db.js';
+import { Phone, Capacity } from '../models/models_db.js';
 import { remove as capacitRemove } from '../repositories/capacity_repository.js';
 //
 export async function insert(newPhone) {
@@ -15,17 +15,29 @@ export async function selectBy(imei) {
 }
 //
 export async function selectById(id) {
-  return await Phone.findByPk(id);
+  //return await Phone.findByPk(id);
+  return await Phone.findOne({
+    where: { id },
+    include: Capacity
+  });
 }
 //
-export async function update(id, update) {
-  const _phone = await selectById(id);
-  update.capacity = _phone.capacity;
-  
-  const updateWithoutImei = Object.assign({}, update);
-  delete updateWithoutImei.imei;
-
-  return await Phone.update(updateWithoutImei, { where: { id } });
+export async function update(id, phone) {
+  return await Phone.update(
+    {
+      imei: phone.imei,
+      imgUrl: phone.imgUrl,
+      brand: phone.brand,
+      model: phone.model,
+      color: phone.color,
+      capacity: phone.capacity,
+      releaseDate: phone.releaseDate,
+      isRemoved: false
+    },
+    {
+      where: { id: id },
+    },
+  );
 }
 //
 export async function remove(id) {

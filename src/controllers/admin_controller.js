@@ -12,8 +12,8 @@ export default class Admin {
       for (let i = 0; i < chunk.length; i++) {
         const _phone = new Phone(chunk[i]);
         const capacity = await capacityInsert(_phone.capacity);
+        _phone.capacity = capacity.id;
         chunk[i] = _phone;
-        chunk[i].capacity = capacity.id;
       }
 
       result = await load(chunk);
@@ -44,6 +44,6 @@ export default class Admin {
   }
   //
   static async removeAllWithprogress(progressNotify) {
-     await remoceAWP(progressNotify);
+    await remoceAWP(progressNotify);
   }
 }

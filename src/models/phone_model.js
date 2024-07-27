@@ -2,25 +2,25 @@
 import BaseModel from './base_model.js';
 
 export class CapacityModel extends BaseModel {
-  constructor(rom, ramMemory, processor, processorSpeed) {
+  constructor(capacity) {
     super();
-    this.rom = rom;
-    this.ramMemory = ramMemory;
-    this.processor = processor;
-    this.processorSpeed = processorSpeed;
+    this.rom = capacity.rom;
+    this.ramMemory = capacity.ramMemory;
+    this.processor = capacity.processor;
+    this.processorSpeed = capacity.processorSpeed;
   }
 }
 
 export default class PhoneModel extends BaseModel {
-  constructor(imei, imgUrl, brand, model, color, capacity, releaseDate) {
+  constructor(phone) {
     super();
-    this.imei = imei;
-    this.imgUrl = imgUrl;
-    this.brand = brand;
-    this.model = model;
-    this.color = color;
-    this.capacity = capacity;
-    this.releaseDate = releaseDate;
+    this.imei = phone.imei;
+    this.imgUrl = phone.imgUrl;
+    this.brand = phone.brand;
+    this.model = phone.model;
+    this.color = phone.color;
+    this.capacity = new CapacityModel(phone.capacity);
+    this.releaseDate = phone.releaseDate;
     this.isRemoved = false;
   }
 }

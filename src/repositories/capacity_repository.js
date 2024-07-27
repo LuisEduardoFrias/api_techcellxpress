@@ -9,10 +9,19 @@ export async function selectById(id) {
   return await Capacity.findByPk(id);
 }
 //
-export async function update(id, update) {
-  const _capacity = selectById(id);
-  _capacity.set(update);
-  return await _capacity.save();
+export async function update(id, capacity) {
+  return await Capacity.update(
+    {
+      rom: capacity.rom,
+      ramMemory: capacity.ramMemory,
+      processor: capacity.processor
+    },
+    {
+      where: {
+        id: id
+      },
+    },
+  );
 }
 //
 export async function remove(id) {

@@ -17,38 +17,41 @@ export async function allRemove() {
 }
 
 export async function removeAllWithprogress(removeAllWithprogress) {
-  const transaction = await sequelize.transaction();
-
-  try {
-
-    const totalRecords = await Phone.count();
-
-    let recordsDeleted = 0;
-
-    await Phone.destroy({
-      where: {}, transaction, individualHooks: true, progress: (instance, progress) => {
-        recordsDeleted++;
-        const progressPercentage = (recordsDeleted / totalRecords) * 100;
-        removeAllWithprogress(progressPercentage.toFixed(2));
-
-        console.log(`Progress: ${progressPercentage.toFixed(2)}%`);
-      }
-    });
-
-    //
-    let i=0;
-    while (i < 1000) {
-      i++;
-      const progressPercentage = (i / totalRecords) * 100;
-      removeAllWithprogress(progressPercentage.toFixed(2));
-    }
-
-    await transaction.commit();
-
-    console.log('Deletion process completed.');
-
-  } catch (error) {
-    await transaction.rollback();
-    console.error('Error deleting data:', error);
-  }
+  return allRemove();
+  /*
+   const transaction = await sequelize.transaction();
+ 
+   try {
+ 
+     const totalRecords = await Phone.count();
+ 
+     let recordsDeleted = 0;
+ 
+     await Phone.destroy({
+       where: {}, transaction, individualHooks: true, progress: (instance, progress) => {
+         recordsDeleted++;
+         const progressPercentage = (recordsDeleted / totalRecords) * 100;
+         removeAllWithprogress(progressPercentage.toFixed(2));
+ 
+         console.log(`Progress: ${progressPercentage.toFixed(2)}%`);
+       }
+     });
+     
+         
+         let i = 0;
+         while (i < 1000) {
+           i++;
+           const progressPercentage = (i / totalRecords) * 100;
+           removeAllWithprogress(progressPercentage.toFixed(2));
+         }
+     
+     await transaction.commit();
+ 
+     console.log('Deletion process completed.');
+ 
+   } catch (error) {
+     await transaction.rollback();
+     console.error('Error deleting data:', error);
+   }
+   */
 }
