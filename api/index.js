@@ -6,7 +6,7 @@ import cookieParser from "cookie-parser";
 import swaggerUi from 'swagger-ui-express';
 import { createServer } from "http";
 
-import { PORT, PROTOCOL, DOMAIN, SWAGGER } from '../src/config.js';
+import { PORT, /*PROTOCOL, DOMAIN, */ SWAGGER } from '../src/config.js';
 import sequelize from '../src/libs/db.js';
 import swaggerDoc from '../src/config_swagger.js';
 import configCors from '../src/config_cors.js';
