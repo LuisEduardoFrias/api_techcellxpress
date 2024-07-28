@@ -18,6 +18,7 @@ import configCors from '../src/config_cors.js';
 
 import session from '../src/routes/session.js';
 import phoneProduct from '../src/routes/phone_product.js';
+import home from '../src/routes/home.js';
 import admin from '../src/routes/admin.js';
 import Socket from '../src/helpers/socket.js';
 import Admin from '../src/controllers/admin_controller.js';
@@ -26,12 +27,15 @@ import Admin from '../src/controllers/admin_controller.js';
 const app = express();
 const httpServer = createServer(app);
 
+
 //settings
 //app.set('protocol', PROTOCOL);
 //app.set('domain', DOMAIN);
 //app.set('port', PORT);
 app.disabled("x-powered-by");
 
+//swagger
+app.use(SWAGGER, swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 //middlewares
 app.use(express.text());
@@ -44,7 +48,6 @@ app.use(
   cors(configCors)
 );
 
-
 /*
 //web socket
 Socket(httpServer, "removeAll", (emit) => {
@@ -53,10 +56,8 @@ Socket(httpServer, "removeAll", (emit) => {
 });
 */
 
-
-//swagger
-app.use(SWAGGER, swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 //routers
+app.use(home);
 app.use(session);
 app.use('/product', phoneProduct);
 app.use('/admin', admin);

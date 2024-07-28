@@ -14,6 +14,7 @@ const router = express.Router();
 // routes
 router.post('/login', async (req, res) => {
   const { user, password } = req.body;
+  console.log("data: ", user)
   try {
     const { error, data } = await Session_.login(user, password);
 
@@ -25,7 +26,7 @@ router.post('/login', async (req, res) => {
     const token = jwt.sign({ data }, SECRET_JWT_KEY, { expiresIn: '1h' });
 
     res.cookie('access_token', token, configCookies);
-
+    console.log("data: ", data)
     res.status(200).json({ error, data });
 
   } catch (error) {
@@ -48,9 +49,9 @@ router.post('/login', async (req, res) => {
 *             type: object
 *             properties:
 *               user:
-*               type: string
-*             password:
-*               type: string
+*                 type: string
+*               password:
+*                 type: string
 *       cookies:
 *         access_token:
 *           description: Token de acceso
