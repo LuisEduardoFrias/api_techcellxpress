@@ -8,50 +8,31 @@ export async function loadProducts(phones) {
 }
 
 export async function allRemove() {
-  let result = await Capacity.destroy({ where: {} });
-
-  if (result === 0)
-    result = await Phone.destroy({ where: {} });
+  // const result = await Capacity.destroy({ where: {} });
+  const result = await Phone.destroy({ where: {} });
 
   return result;
 }
 
-export async function removeAllWithprogress(removeAllWithprogress) {
-  return allRemove();
-  /*
-   const transaction = await sequelize.transaction();
- 
-   try {
- 
-     const totalRecords = await Phone.count();
- 
-     let recordsDeleted = 0;
- 
-     await Phone.destroy({
-       where: {}, transaction, individualHooks: true, progress: (instance, progress) => {
-         recordsDeleted++;
-         const progressPercentage = (recordsDeleted / totalRecords) * 100;
-         removeAllWithprogress(progressPercentage.toFixed(2));
- 
-         console.log(`Progress: ${progressPercentage.toFixed(2)}%`);
-       }
-     });
-     
-         
-         let i = 0;
-         while (i < 1000) {
-           i++;
-           const progressPercentage = (i / totalRecords) * 100;
-           removeAllWithprogress(progressPercentage.toFixed(2));
-         }
-     
-     await transaction.commit();
- 
-     console.log('Deletion process completed.');
- 
-   } catch (error) {
-     await transaction.rollback();
-     console.error('Error deleting data:', error);
-   }
-   */
+export async function removeAllWithprogress(_removeAllWithprogress) {
+
+  const phones = await Phone.findAll();
+  const capacities = await Capacity.findAll();
+  const totalRecords = await Phone.count() + await Capacity.count()
+
+  const allRecords = [...phones, ...capacities]
+  let recordsDeleted = 0;
+  const arrayRecordDeleted = [];
+
+  for (const record of allRecords) {
+    arrayRecordDeleted.push(record);
+    await record.destroy();
+    recordsDeleted++;
+
+    const progressPercentage = (recordsDeleted / totalRecords) * 100;
+    _removeAllWithprogress(progressPercentage.toFixed(2));
+  }
+
+  return arrayRecordDeleted;
+
 }

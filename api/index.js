@@ -16,7 +16,6 @@ import configCors from '../src/config_cors.js';
 //sync tables dabe
 //import '../src/models/models_db.js';
 //
-
 import session from '../src/routes/session.js';
 import phoneProduct from '../src/routes/phone_product.js';
 import home from '../src/routes/home.js';
@@ -46,13 +45,24 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(morgan('dev')); // combined
 
-//app.use(cors(configCors));
-app.use(cors());
+app.use(cors(configCors));
 
 //web socket
-Socket(httpServer, "removeAll", (emit) => {
-  Admin.removeAllWithprogress((progress) =>
-    emit('ProgressRemoveDb', progress));
+Socket(httpServer, "removeAll", (socket) => {
+
+  (async () => {
+
+    const ard = await Admin.removeAllWithprogress((progress) => {
+      try {
+        socket?.emit('ProgressRemoveDb', progress);
+      } catch (error) {
+        console.log("error: " + error)
+      }
+    });
+
+    socket.emit('DeleteCompleted', ard);
+
+  })()
 });
 
 //routers

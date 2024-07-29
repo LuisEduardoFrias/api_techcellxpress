@@ -14,9 +14,9 @@ export default function Socket(server, nameToListen, fn) {
 
     socket.on(nameToListen, (token) => {
       //validate token with jwt
-      console.log("token: ", token);
+      //console.log("token: ", token);
 
-      fn(socket.emit);
+      fn(socket);
     });
 
   });

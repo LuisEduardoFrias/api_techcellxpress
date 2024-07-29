@@ -6,7 +6,6 @@ const configCors = {
   accept: 'application/json',
   methods: METHODS,
   credentials: true,
-  //credentials: true,
   //allowedHeaders: 'Content-Type,Authorization',
 };
 

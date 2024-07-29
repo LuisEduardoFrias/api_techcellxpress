@@ -10,18 +10,11 @@ export async function selectById(id) {
 }
 //
 export async function update(id, capacity) {
-  return await Capacity.update(
-    {
-      rom: capacity.rom,
-      ramMemory: capacity.ramMemory,
-      processor: capacity.processor
-    },
-    {
-      where: {
-        id: id
-      },
-    },
-  );
+  const _capacity = await Phone.findByPk(id);
+
+  await _capacity.update({ ...capacity });
+
+  return await _capacity.save();
 }
 //
 export async function remove(id) {

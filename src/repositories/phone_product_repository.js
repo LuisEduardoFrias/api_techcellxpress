@@ -23,21 +23,11 @@ export async function selectById(id) {
 }
 //
 export async function update(id, phone) {
-  return await Phone.update(
-    {
-      imei: phone.imei,
-      imgUrl: phone.imgUrl,
-      brand: phone.brand,
-      model: phone.model,
-      color: phone.color,
-      capacity: phone.capacity,
-      releaseDate: phone.releaseDate,
-      isRemoved: false
-    },
-    {
-      where: { id: id },
-    },
-  );
+  const _phone = await Phone.findByPk(id);
+
+  await _phone.update({ ...phone });
+
+  return await _phone.save();
 }
 //
 export async function remove(id) {
@@ -47,4 +37,3 @@ export async function remove(id) {
     where: { id }
   });
 }
-//

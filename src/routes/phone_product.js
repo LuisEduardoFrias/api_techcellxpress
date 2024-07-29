@@ -100,6 +100,7 @@ router.get('/search/:search', async (req, res) => {
 //
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
+
   try {
     const { error, data } = await PhoneProduct.readById(id);
 

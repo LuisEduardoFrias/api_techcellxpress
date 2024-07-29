@@ -44,6 +44,6 @@ export default class Admin {
   }
   //
   static async removeAllWithprogress(progressNotify) {
-    await remoceAWP(progressNotify);
+   return await remoceAWP(progressNotify);
   }
 }

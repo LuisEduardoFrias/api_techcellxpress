@@ -78,12 +78,12 @@ export default class PhoneProduct {
     const capacity = update.capacity;
 
     const cap = await udtCapacity(capacity.id, capacity);
-    console.log("controller: ", cap)
-    if (cap.length > 0) {
+    
+    if (cap) {
       update.capacity = capacity.id;
       const data = await udtPhone(id, update);
 
-      if (data.length > 0)
+      if (data)
         return { error: null, data };
     }
 

@@ -14,7 +14,7 @@ const router = express.Router();
 // routes
 router.post('/login', async (req, res) => {
   const { user, password } = req.body;
-  console.log("data: ", user)
+  
   try {
     const { error, data } = await Session_.login(user, password);
 
@@ -27,7 +27,7 @@ router.post('/login', async (req, res) => {
 
     res.cookie('access_token', token, configCookies);
 
-    res.setHeader('Access-Control-Allow-Origin', ORIGIN);
+    // res.setHeader('Access-Control-Allow-Origin', ORIGIN);
     res.status(200).json({ error, data });
 
   } catch (error) {
@@ -130,7 +130,7 @@ router.post('/register', async (req, res) => {
       res.status(409).json({ error });
       return;
     }
-    res.setHeader('Access-Control-Allow-Origin', ORIGIN);
+    //  res.setHeader('Access-Control-Allow-Origin', ORIGIN);
     res.status(200).json({ error, data });
   } catch (error) {
     console.error(error);
