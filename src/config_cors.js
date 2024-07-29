@@ -1,6 +1,6 @@
 //
 import { ORIGIN, METHODS } from './config.js';
-
+console.log("Origin", ORIGIN)
 const configCors = {
   origin: ORIGIN,
   accept: 'application/json',

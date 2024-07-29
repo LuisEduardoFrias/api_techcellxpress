@@ -50,13 +50,11 @@ app.use(
   cors(configCors)
 );
 
-/*
 //web socket
 Socket(httpServer, "removeAll", (emit) => {
   Admin.removeAllWithprogress((progress) =>
     emit('ProgressRemoveDb', progress));
 });
-*/
 
 //routers
 app.use(home);
