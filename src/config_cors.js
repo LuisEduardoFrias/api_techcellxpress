@@ -2,7 +2,7 @@
 import { ORIGIN, METHODS } from './config.js';
 console.log("Origin", ORIGIN)
 const configCors = {
-  origin: ORIGIN,
+  origin: "https://client-techcellxpress.vercel.app",
   accept: 'application/json',
   methods: METHODS,
   credentials: true,
