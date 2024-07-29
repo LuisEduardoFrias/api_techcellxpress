@@ -46,9 +46,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(morgan('dev')); // combined
 
-app.use(
-  cors(configCors)
-);
+//app.use(cors(configCors));
+app.use(cors());
 
 //web socket
 Socket(httpServer, "removeAll", (emit) => {

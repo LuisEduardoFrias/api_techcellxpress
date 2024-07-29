@@ -1,6 +1,6 @@
 //
 import { ORIGIN, METHODS } from './config.js';
-console.log("Cors cross origin: ", ORIGIN)
+
 const configCors = {
   origin: ORIGIN,
   accept: 'application/json',
