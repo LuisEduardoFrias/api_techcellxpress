@@ -6,7 +6,7 @@ import configCookies from '../config_cookies.js';
 import Session_ from '../controllers/session_controller.js';
 import middlewares from '../middlewares.js';
 import { SECRET_JWT_KEY } from '../config.js';
-
+import { ORIGIN } from '../config_cors.js';
 //----------------------------
 
 const router = express.Router();
@@ -26,7 +26,8 @@ router.post('/login', async (req, res) => {
     const token = jwt.sign({ data }, SECRET_JWT_KEY, { expiresIn: '1h' });
 
     res.cookie('access_token', token, configCookies);
-    console.log("data: ", data)
+
+    res.setHeader('Access-Control-Allow-Origin', ORIGIN);
     res.status(200).json({ error, data });
 
   } catch (error) {
@@ -129,7 +130,7 @@ router.post('/register', async (req, res) => {
       res.status(409).json({ error });
       return;
     }
-
+    res.setHeader('Access-Control-Allow-Origin', ORIGIN);
     res.status(200).json({ error, data });
   } catch (error) {
     console.error(error);
