@@ -5,8 +5,8 @@ import { serialize } from 'cookie';
 import configCookies from '../config_cookies.js';
 import Session_ from '../controllers/session_controller.js';
 import middlewares from '../middlewares.js';
-import { SECRET_JWT_KEY } from '../config.js';
-import { ORIGIN } from '../config_cors.js';
+import { SECRET_JWT_KEY, ORIGIN } from '../config.js';
+
 //----------------------------
 
 const router = express.Router();
