@@ -1,5 +1,6 @@
 //
 import express from 'express';
+import _static from 'serve-static';
 import cors from 'cors';
 import morgan from 'morgan';
 import cookieParser from "cookie-parser";
@@ -26,7 +27,7 @@ import Admin from '../src/controllers/admin_controller.js';
 
 const app = express();
 const httpServer = createServer(app);
-
+const { pathname: root } = new URL('../../', import.meta.url)
 
 //settings
 //app.set('protocol', PROTOCOL);
@@ -35,6 +36,7 @@ const httpServer = createServer(app);
 app.disabled("x-powered-by");
 
 //swagger
+app.use(_static(root + '/public'));
 app.use(SWAGGER, swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 //middlewares
