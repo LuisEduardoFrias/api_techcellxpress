@@ -3,6 +3,9 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+console.log("VARIABLE PORT: ", process.env.PORT);
+console.log("VARIABLE ORIGIN: ", process.env.ORIGIN);
+
 export const {
   // PROTOCOL = process.env.PROTOCOL || 'http://',
   //  DOMAIN = process.env.DOMAIN || 'localhost:',
